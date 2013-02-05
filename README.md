@@ -13,3 +13,8 @@ To run the word generator that will pipe it's generated results into the spell c
 ./generate_incorrect_words.py
 ```
 
+To run the tests type : 
+
+```
+python tests.py
+```
