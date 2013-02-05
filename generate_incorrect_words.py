@@ -77,17 +77,6 @@ def generate_errors_in_word(word):
     return "".join([apply_random_transformation(letter, transformations_for_ends) for letter in word])
 
 
-
-def pipe_in_spell_check(word):
-    # pipe word into spell check
-    # look at output make sure it is not "NO SUGGESTION"
-    pass
-
-def main(args):
-    # generate X words
-    # pipe each word in spell check and check 
-    pass
-
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, signal_handler)
     parser = OptionParser()
@@ -102,10 +91,11 @@ if __name__ == "__main__":
     inverted_index = load_file_and_index(filename)
     random_word = choose_word_from_index(inverted_index)
     child = Popen(["./spellcheck.py"], stdin=PIPE, stdout=PIPE,stderr=PIPE)
-    cmd = "{}".format(generate_errors_in_word(random_word))
-    print "input word : ", cmd
+    cmd = generate_errors_in_word(random_word)
     output = child.communicate(cmd)
     result = output[0].split("\n")[1]
+    ##
+    print "input word : ", cmd
     if "NO SUGGESTION" not in result :
         print "result : ", result.replace("> ", "")
     else :
