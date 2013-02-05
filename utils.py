@@ -1,5 +1,8 @@
 import signal, sys
 
+VOWELS = ["a", "e", "i", "o", "u", "y"]
+
+
 def signal_handler(signal, frame):
     print 'Goodbye!'
     sys.exit(0)

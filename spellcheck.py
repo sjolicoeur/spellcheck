@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 from optparse import OptionParser
 import re, signal, sys
-from utils import load_file_and_index, signal_handler, get_first_letter_of, get_last_letter_of
+from utils import load_file_and_index, signal_handler, get_first_letter_of, get_last_letter_of, VOWELS
 
-VOWELS = ["a", "e", "i", "o", "u", "y"]
+# VOWELS = ["a", "e", "i", "o", "u", "y"]
 
 def signal_handler(signal, frame):
         print 'Goodbye!'
@@ -109,20 +109,14 @@ if __name__ == "__main__":
     # parse file 
     raw_data = []
     inverted_index = {}
-    # try :
-    #     filename = options.filename
-    #     with open(filename, 'r') as f:
-    #         raw_data = [line.split("\n")[0] for line in f.readlines()]
-    #         inverted_index = generate_index_by_first_and_last_letter(raw_data)
-    # except IOError :
-    #     print "Error while opening the file... Check location or permissions"
-    #     sys.exit(0)
     filename = options.filename
     inverted_index = load_file_and_index(filename)
     while True :
-        word = raw_input("> ")
-        print recommend_correction(word, inverted_index)
-
+        try :
+            word = raw_input("> ")
+            print recommend_correction(word, inverted_index)
+        except EOFError:
+            sys.exit(0)
 
 
 

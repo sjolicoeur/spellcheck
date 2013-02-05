@@ -7,7 +7,8 @@ from spellcheck import compress_word, spellcheck_suggestions_for_repeating_lette
 from mocks import MOCK_INDEX
 
 
-class TestSequenceFunctions(unittest.TestCase):
+
+class TestSpellcheckFunctions(unittest.TestCase):
 
     def setUp(self):
         #self.seq = range(10)
@@ -86,6 +87,17 @@ class TestSequenceFunctions(unittest.TestCase):
     def test_expect_sheeppen(self) :
         assert recommend_correction("sheeppan", self.fl_index) == 'sheeppen'
 
+from generate_incorrect_words import substitute_vowel
+
+class TestGenerateWordFunctions(unittest.TestCase):
+
+    def setUp(self):
+        #self.seq = range(10)
+        self.fl_index = MOCK_INDEX
+
+    def test_substitute_vowel(self):
+        result = substitute_vowel("a")
+        assert result in ["e", "i", "o", "u", "y"]
 
 if __name__ == '__main__':
     unittest.main()
