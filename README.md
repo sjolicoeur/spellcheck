@@ -1,6 +1,12 @@
 Spellcheck Kata
 ===============
 
+## Requirement(s) :
+
+python 2.7
+
+## How to run
+
 To run the interactive spellchecker in the root of the project type :
 
 ```
