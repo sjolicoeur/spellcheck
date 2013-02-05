@@ -1,29 +1,13 @@
 #!/usr/bin/env python
 from optparse import OptionParser
 import re, signal, sys
-
+from utils import load_file_and_index, signal_handler, get_first_letter_of, get_last_letter_of
 
 VOWELS = ["a", "e", "i", "o", "u", "y"]
 
 def signal_handler(signal, frame):
         print 'Goodbye!'
         sys.exit(0)
-
-def get_first_letter_of(word):
-    return word[0]
-
-def get_last_letter_of(word):
-    return word[-1:][0]
-
-def generate_index_by_first_and_last_letter(data):
-    fl_index = {}
-    for word in data :
-        word = word.lower()
-        key = get_first_letter_of(word) + get_last_letter_of(word) # do a first and a last func
-        if key not in fl_index :
-            fl_index[key] = []
-        fl_index[key].append(word)
-    return fl_index
 
 def correct_case(word) :
     return word.lower()
@@ -125,14 +109,16 @@ if __name__ == "__main__":
     # parse file 
     raw_data = []
     inverted_index = {}
-    try :
-        filename = options.filename
-        with open(filename, 'r') as f:
-            raw_data = [line.split("\n")[0] for line in f.readlines()]
-            inverted_index = generate_index_by_first_and_last_letter(raw_data)
-    except IOError :
-        print "Error while opening the file... Check location or permissions"
-        sys.exit(0)
+    # try :
+    #     filename = options.filename
+    #     with open(filename, 'r') as f:
+    #         raw_data = [line.split("\n")[0] for line in f.readlines()]
+    #         inverted_index = generate_index_by_first_and_last_letter(raw_data)
+    # except IOError :
+    #     print "Error while opening the file... Check location or permissions"
+    #     sys.exit(0)
+    filename = options.filename
+    inverted_index = load_file_and_index(filename)
     while True :
         word = raw_input("> ")
         print recommend_correction(word, inverted_index)
