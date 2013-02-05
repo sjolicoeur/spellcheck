@@ -1,0 +1,4 @@
+spellcheck
+==========
+
+spellcheck kata
